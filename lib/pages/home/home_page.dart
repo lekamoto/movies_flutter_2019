@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Home"),
+          title: Text("Flutter Filmes"),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.exit_to_app),

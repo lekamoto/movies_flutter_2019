@@ -22,7 +22,6 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   final _input = LoginInput();
-
   final _bloc = LoginBloc();
 
   @override

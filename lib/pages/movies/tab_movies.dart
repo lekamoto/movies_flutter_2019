@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movies_udemy/pages/movies/movie.dart';
 import 'package:flutter_movies_udemy/pages/movies/movies_bloc.dart';
+import 'package:flutter_movies_udemy/utils/nav.dart';
 import 'package:flutter_movies_udemy/utils/response.dart';
 import 'package:flutter_movies_udemy/widgets/text_error.dart';
+
+import 'movie_page.dart';
 
 class TabMovies extends StatefulWidget {
   @override
@@ -86,7 +89,7 @@ class _TabMoviesState extends State<TabMovies> {
   }
 
   void _onClickMovie(Movie m) {
-    print("> Movie $m");
+    push(context, MoviePage(m));
   }
 
   Future<void> _onRefresh() {
