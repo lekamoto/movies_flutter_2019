@@ -12,9 +12,15 @@ class FavoritosBloc {
   final _flagFavoritos = BehaviorSubject<bool>();
   get getFavoritos => _flagFavoritos.stream;
 
+  get setFavorito => _flagFavoritos.sink.add;
+
   // stream
   final _movies = BehaviorSubject<Response<List<Movie>>>();
   get moviesStream => _movies.stream;
+
+//  void setFavorito(bool b) {
+//    _flagFavoritos.sink.add(b);
+//  }
 
   Future fetch({bool isRefresh = false}) async {
     _progress.sink.add(true);
@@ -46,10 +52,6 @@ class FavoritosBloc {
     return b;
   }
 
-  void setFavorito(bool b) {
-    _flagFavoritos.sink.add(b);
-  }
-
   Future<bool> favoritar(Movie m) async {
     final db = MovieDB.getInstance();
 
@@ -73,6 +75,4 @@ class FavoritosBloc {
     _movies.close();
     _flagFavoritos.close();
   }
-
-
 }

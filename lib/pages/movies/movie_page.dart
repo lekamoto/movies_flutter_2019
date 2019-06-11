@@ -188,6 +188,13 @@ class _MoviePageState extends State<MoviePage> {
     //favoritosBloc.fetch(isRefresh: true);
     print("bloc fetch set $b");
 
-    favoritosBloc.setFavorito(b);
+    _bloc.setFavorito(b);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _bloc.close();
   }
 }
