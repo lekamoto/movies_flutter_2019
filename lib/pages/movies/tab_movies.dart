@@ -1,3 +1,4 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movies_udemy/pages/movies/movie.dart';
 import 'package:flutter_movies_udemy/pages/movies/movies_bloc.dart';
@@ -17,7 +18,9 @@ class TabMovies extends StatefulWidget {
 class _TabMoviesState extends State<TabMovies>
 with AutomaticKeepAliveClientMixin<TabMovies>
 {
-  final _bloc = MoviesBloc();
+//  final bloc = MoviesBloc();
+
+  MoviesBloc get bloc => BlocProvider.getBloc<MoviesBloc>();
 
   @override
   bool get wantKeepAlive => true;
@@ -25,16 +28,17 @@ with AutomaticKeepAliveClientMixin<TabMovies>
   @override
   void initState() {
     super.initState();
-print("init tab movie");
-    _bloc.fetch();
+
+    bloc.fetch();
   }
 
   @override
   Widget build(BuildContext context) {
 
     return StreamBuilder(
-      stream: _bloc.moviesStream,
+      stream: bloc.moviesStream,
       builder: (context, snapshot) {
+
         if (!snapshot.hasData) {
           return Center(
             child: CircularProgressIndicator(),
@@ -106,11 +110,11 @@ print("init tab movie");
   }
 
   Future<void> _onRefresh() {
-    return _bloc.fetch();
+    return bloc.fetch();
   }
 
   Future<void> _onRefreshError() {
-    return _bloc.fetch(isRefresh: true);
+    return bloc.fetch(isRefresh: true);
   }
 
   @override
