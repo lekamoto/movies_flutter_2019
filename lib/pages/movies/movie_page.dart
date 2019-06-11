@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movies_udemy/main.dart';
-import 'package:flutter_movies_udemy/pages/events/events.dart';
-import 'package:flutter_movies_udemy/pages/favoritos/favoritos_bloc.dart';
-import 'package:flutter_movies_udemy/pages/favoritos/tab_favoritos.dart';
 import 'package:flutter_movies_udemy/pages/movies/movie.dart';
-import 'package:flutter_movies_udemy/pages/movies/movies_bloc.dart';
+import 'package:flutter_movies_udemy/pages/movies/movie_bloc.dart';
 
 class MoviePage extends StatefulWidget {
   final Movie movie;
@@ -16,7 +12,7 @@ class MoviePage extends StatefulWidget {
 }
 
 class _MoviePageState extends State<MoviePage> {
-  final _bloc = FavoritosBloc();
+  final _bloc = MovieBloc();
 
   Movie get movie => widget.movie;
 
@@ -24,7 +20,7 @@ class _MoviePageState extends State<MoviePage> {
   void initState() {
     super.initState();
 
-    _bloc.isFavorito(movie);
+    _bloc.fetchFavorito(movie);
   }
 
   @override
@@ -46,7 +42,6 @@ class _MoviePageState extends State<MoviePage> {
               initialData: false,
               stream: _bloc.getFavoritos,
               builder: (context, snapshot) {
-                print("< ${snapshot.data}");
                 return Icon(
                   Icons.favorite,
                   size: 34,
@@ -61,10 +56,10 @@ class _MoviePageState extends State<MoviePage> {
         ],
         flexibleSpace: FlexibleSpaceBar(
           centerTitle: false,
-          title: Text(widget.movie.title),
+          title: Text(movie.title),
           background: Container(
             child: Image.network(
-              widget.movie.urlFoto,
+              movie.urlFoto,
               fit: BoxFit.cover,
             ),
           ),
@@ -83,14 +78,14 @@ class _MoviePageState extends State<MoviePage> {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  _card(Icons.favorite, widget.movie.vote_count),
-                  _card(Icons.star, widget.movie.vote_average),
+                  _card(Icons.favorite, movie.vote_count),
+                  _card(Icons.star, movie.vote_average),
                 ],
               ),
               Row(
                 children: <Widget>[
-                  _card(Icons.movie, widget.movie.popularity),
-                  _card(Icons.date_range, widget.movie.release_date),
+                  _card(Icons.movie, movie.popularity),
+                  _card(Icons.date_range, movie.release_date),
                 ],
               )
             ],
@@ -128,7 +123,7 @@ class _MoviePageState extends State<MoviePage> {
                 height: 26,
               ),
               Text(
-                widget.movie.overview,
+                movie.overview,
                 style: TextStyle(
                   fontSize: 18,
                   color: Colors.white,
@@ -182,14 +177,7 @@ class _MoviePageState extends State<MoviePage> {
   }
 
   Future _onClickFavoritar() async {
-    final b = await _bloc.favoritar(movie);
-
-    eventBus.fire(FavoritosEvent());
-
-    //favoritosBloc.fetch(isRefresh: true);
-    print("bloc fetch set $b");
-
-    _bloc.setFavorito(b);
+    _bloc.favoritar(movie);
   }
 
   @override
