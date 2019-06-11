@@ -12,8 +12,13 @@ class TabMovies extends StatefulWidget {
   _TabMoviesState createState() => _TabMoviesState();
 }
 
-class _TabMoviesState extends State<TabMovies> {
+class _TabMoviesState extends State<TabMovies>
+with AutomaticKeepAliveClientMixin<TabMovies>
+{
   final _bloc = MoviesBloc();
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {

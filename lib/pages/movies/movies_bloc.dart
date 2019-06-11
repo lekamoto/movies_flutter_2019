@@ -1,5 +1,6 @@
 
 import 'package:flutter_movies_udemy/pages/movies/movie_api.dart';
+import 'package:flutter_movies_udemy/pages/movies/movie_db.dart';
 import 'package:flutter_movies_udemy/utils/response.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -30,6 +31,20 @@ class MoviesBloc {
 
     } finally {
       _progressController.sink.add(false);
+    }
+  }
+
+  Future<bool> favoritar(Movie m) async {
+    final db = MovieDB.getInstance();
+
+    final exists = await db.exists(m);
+
+    if (exists) {
+      db.deleteMovie(m);
+      return false;
+    } else {
+      await db.saveMovie(m);
+      return true;
     }
   }
 

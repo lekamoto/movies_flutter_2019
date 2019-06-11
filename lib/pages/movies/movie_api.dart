@@ -21,7 +21,7 @@ class MoviesApi {
 
       // Parser
       final map = convert.json.decode(json);
-      print("< json: $map");
+//      print("< json: $map");
 
       final mapMovies = map["results"];
 

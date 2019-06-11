@@ -32,8 +32,28 @@ class Movie {
         vote_count = json["vote_count"].toString();
 
 
+  Map toMap() {
+    var map = {
+      "id": id,
+      "title":title,
+      "tagline":tagline,
+      "poster_path":poster_path,
+      "vote_average":vote_average,
+      "overview":overview,
+      "release_date":release_date,
+      "homepage":homepage,
+      "popularity":popularity,
+      "production_companies":production_companies,
+      "production_countries":production_countries,
+      "runtime":runtime,
+      "vote_count":vote_count
+    };
+    return map;
+  }
+
   @override
   String toString() {
     return title;
   }
+
 }
