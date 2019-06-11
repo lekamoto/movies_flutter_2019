@@ -16,12 +16,16 @@ class MoviePage extends StatefulWidget {
 }
 
 class _MoviePageState extends State<MoviePage> {
-  
   final _bloc = FavoritosBloc();
-  
-  final favoritado = false;
 
   Movie get movie => widget.movie;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _bloc.isFavorito(movie);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +42,17 @@ class _MoviePageState extends State<MoviePage> {
         pinned: false,
         actions: <Widget>[
           IconButton(
-            icon: Icon(
-              Icons.favorite,
-              size: 34,
-              color: favoritado ? Colors.red : Colors.white,
-            ),
+            icon: StreamBuilder<bool>(
+                initialData: false,
+                stream: _bloc.getFavoritos,
+                builder: (context, snapshot) {
+                  print("< ${snapshot.data}");
+                  return Icon(
+                    Icons.favorite,
+                    size: 34,
+                    color: snapshot.data ? Colors.red : Colors.white,
+                  );
+                }),
             onPressed: () {
               _onClickFavoritar();
             },
@@ -72,14 +82,14 @@ class _MoviePageState extends State<MoviePage> {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  _card(Icons.favorite, movie.vote_count),
-                  _card(Icons.star, movie.vote_average),
+                  _card(Icons.favorite, widget.movie.vote_count),
+                  _card(Icons.star, widget.movie.vote_average),
                 ],
               ),
               Row(
                 children: <Widget>[
-                  _card(Icons.movie, movie.popularity),
-                  _card(Icons.date_range, movie.release_date),
+                  _card(Icons.movie, widget.movie.popularity),
+                  _card(Icons.date_range, widget.movie.release_date),
                 ],
               )
             ],
@@ -117,7 +127,7 @@ class _MoviePageState extends State<MoviePage> {
                 height: 26,
               ),
               Text(
-                movie.overview,
+                widget.movie.overview,
                 style: TextStyle(
                   fontSize: 18,
                   color: Colors.white,
@@ -139,7 +149,7 @@ class _MoviePageState extends State<MoviePage> {
       child: Expanded(
         flex: 1,
         child: InkWell(
-          onTap: (){
+          onTap: () {
             print("Tap > $texto");
           },
           child: Container(
@@ -176,13 +186,8 @@ class _MoviePageState extends State<MoviePage> {
     eventBus.fire(FavoritosEvent());
 
     //favoritosBloc.fetch(isRefresh: true);
-    print("bloc fetch");
-  }
+    print("bloc fetch set $b");
 
-  @override
-  void dispose() {
-    super.dispose();
-
-    //_bloc.close();
+    favoritosBloc.setFavorito(b);
   }
 }

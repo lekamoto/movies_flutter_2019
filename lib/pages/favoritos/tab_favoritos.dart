@@ -30,7 +30,6 @@ class _TabFavoritosState extends State<TabFavoritos>
     favoritosBloc.fetch();
 
     eventBus.on<FavoritosEvent>().listen((event) {
-      print("Refresh it Baby!");
       favoritosBloc.fetch();
     });
   }
@@ -41,7 +40,6 @@ class _TabFavoritosState extends State<TabFavoritos>
     return StreamBuilder(
       stream: favoritosBloc.moviesStream,
       builder: (context, snapshot) {
-        print("stream ${snapshot.data}");
         if (!snapshot.hasData) {
           return Center(
             child: CircularProgressIndicator(),
