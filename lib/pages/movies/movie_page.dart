@@ -127,29 +127,36 @@ class _MoviePageState extends State<MoviePage> {
   }
 
   _card(IconData icone, dynamic texto) {
-    return Expanded(
-      flex: 1,
-      child: Container(
-        padding: EdgeInsets.only(top: 30, bottom: 30, left: 15, right: 15),
-        margin: EdgeInsets.all(15),
-        decoration: new BoxDecoration(
-          border: Border.all(width: 1.0, color: Colors.grey),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          children: <Widget>[
-            Icon(
-              icone,
-              color: Colors.deepOrange,
+    return Container(
+      child: Expanded(
+        flex: 1,
+        child: InkWell(
+          onTap: (){
+            print("Tap > $texto");
+          },
+          child: Container(
+            padding: EdgeInsets.only(top: 30, bottom: 30, left: 15, right: 15),
+            margin: EdgeInsets.all(15),
+            decoration: new BoxDecoration(
+              border: Border.all(width: 1.0, color: Colors.grey),
+              borderRadius: BorderRadius.circular(10),
             ),
-            SizedBox(
-              height: 16,
+            child: Column(
+              children: <Widget>[
+                Icon(
+                  icone,
+                  color: Colors.deepOrange,
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Text(
+                  "$texto",
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                )
+              ],
             ),
-            Text(
-              "$texto",
-              style: TextStyle(fontSize: 18, color: Colors.black),
-            )
-          ],
+          ),
         ),
       ),
     );
