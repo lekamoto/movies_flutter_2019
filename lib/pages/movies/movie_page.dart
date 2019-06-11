@@ -43,16 +43,17 @@ class _MoviePageState extends State<MoviePage> {
         actions: <Widget>[
           IconButton(
             icon: StreamBuilder<bool>(
-                initialData: false,
-                stream: _bloc.getFavoritos,
-                builder: (context, snapshot) {
-                  print("< ${snapshot.data}");
-                  return Icon(
-                    Icons.favorite,
-                    size: 34,
-                    color: snapshot.data ? Colors.red : Colors.white,
-                  );
-                }),
+              initialData: false,
+              stream: _bloc.getFavoritos,
+              builder: (context, snapshot) {
+                print("< ${snapshot.data}");
+                return Icon(
+                  Icons.favorite,
+                  size: 34,
+                  color: snapshot.data ? Colors.red : Colors.white,
+                );
+              },
+            ),
             onPressed: () {
               _onClickFavoritar();
             },
