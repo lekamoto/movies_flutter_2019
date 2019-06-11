@@ -25,7 +25,7 @@ with AutomaticKeepAliveClientMixin<TabMovies>
   @override
   void initState() {
     super.initState();
-
+print("init tab movie");
     _bloc.fetch();
   }
 
