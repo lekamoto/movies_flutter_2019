@@ -39,8 +39,8 @@ class _HomePageState extends State<HomePage>
           ]),
         ),
         body: TabBarView(children: [
-          TabMovies(),
-          TabFavoritos()
+          TabMovies(false),
+          TabMovies(true)
         ]),
         drawer: DrawerMenu(),
       ),

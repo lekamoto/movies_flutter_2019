@@ -3,11 +3,19 @@ import 'package:flutter_movies_udemy/pages/movies/movie.dart';
 import 'package:flutter_movies_udemy/pages/movies/movies_bloc.dart';
 import 'package:flutter_movies_udemy/utils/nav.dart';
 import 'package:flutter_movies_udemy/utils/response.dart';
+import 'package:flutter_movies_udemy/widgets/text_empty.dart';
 import 'package:flutter_movies_udemy/widgets/text_error.dart';
 
 import 'movie_page.dart';
 
 class TabMovies extends StatefulWidget {
+
+  // Flag que indica que é para mostrar a lista de favoritos
+  // Se estiver false mostra os dados da API
+  final bool modeFavoritos;
+
+  TabMovies(this.modeFavoritos);
+
   @override
   _TabMoviesState createState() => _TabMoviesState();
 }
@@ -24,7 +32,7 @@ with AutomaticKeepAliveClientMixin<TabMovies>
   void initState() {
     super.initState();
 
-    _bloc.fetch();
+    _bloc.fetch(widget.modeFavoritos);
   }
 
   @override
@@ -39,6 +47,11 @@ with AutomaticKeepAliveClientMixin<TabMovies>
         }
 
         Response<List<Movie>> response = snapshot.data;
+
+        if(response.isOk() && response.result.isEmpty) {
+          // Lista vazia
+          return TextEmpty("Nenhum filme nos favoritos.");
+        }
 
         return response.isOk()
             ? _griView(response.result, context, true)
@@ -98,11 +111,11 @@ with AutomaticKeepAliveClientMixin<TabMovies>
   }
 
   Future<void> _onRefresh() {
-    return _bloc.fetch();
+    return _bloc.fetch(widget.modeFavoritos);
   }
 
   Future<void> _onRefreshError() {
-    return _bloc.fetch(isRefresh: true);
+    return _bloc.fetch(widget.modeFavoritos,isRefresh: true);
   }
 
   @override
