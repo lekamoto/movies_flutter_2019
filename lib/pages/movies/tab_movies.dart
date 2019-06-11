@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movies_udemy/pages/events/events.dart';
 import 'package:flutter_movies_udemy/pages/movies/movie.dart';
 import 'package:flutter_movies_udemy/pages/movies/movies_bloc.dart';
 import 'package:flutter_movies_udemy/utils/nav.dart';
@@ -9,12 +10,6 @@ import 'package:flutter_movies_udemy/widgets/text_error.dart';
 import 'movie_page.dart';
 
 class TabMovies extends StatefulWidget {
-
-  // Flag que indica que é para mostrar a lista de favoritos
-  // Se estiver false mostra os dados da API
-  final bool modeFavoritos;
-
-  TabMovies(this.modeFavoritos);
 
   @override
   _TabMoviesState createState() => _TabMoviesState();
@@ -32,11 +27,12 @@ with AutomaticKeepAliveClientMixin<TabMovies>
   void initState() {
     super.initState();
 
-    _bloc.fetch(widget.modeFavoritos);
+    _bloc.fetch();
   }
 
   @override
   Widget build(BuildContext context) {
+
     return StreamBuilder(
       stream: _bloc.moviesStream,
       builder: (context, snapshot) {
@@ -111,17 +107,17 @@ with AutomaticKeepAliveClientMixin<TabMovies>
   }
 
   Future<void> _onRefresh() {
-    return _bloc.fetch(widget.modeFavoritos);
+    return _bloc.fetch();
   }
 
   Future<void> _onRefreshError() {
-    return _bloc.fetch(widget.modeFavoritos,isRefresh: true);
+    return _bloc.fetch(isRefresh: true);
   }
 
   @override
   void dispose() {
     super.dispose();
 
-    _bloc.close();
+    //_bloc.close();
   }
 }

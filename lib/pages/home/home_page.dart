@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movies_udemy/pages/events/events.dart';
 import 'package:flutter_movies_udemy/pages/favoritos/tab_favoritos.dart';
 import 'package:flutter_movies_udemy/pages/home/drawer.dart';
 import 'package:flutter_movies_udemy/pages/login/login_page.dart';
@@ -15,7 +16,13 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin<HomePage> {
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print("build home");
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -39,8 +46,8 @@ class _HomePageState extends State<HomePage>
           ]),
         ),
         body: TabBarView(children: [
-          TabMovies(false),
-          TabMovies(true)
+          TabMovies(),
+          TabFavoritos()
         ]),
         drawer: DrawerMenu(),
       ),

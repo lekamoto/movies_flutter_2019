@@ -14,7 +14,7 @@ class MovieDB {
   static Database _db;
 
   Future<Database> get db async {
-    if (_db != null) {
+    if (_db != null && _db.isOpen) {
       return _db;
     }
     _db = await initDb();
@@ -25,6 +25,7 @@ class MovieDB {
     String databasesPath = await getDatabasesPath();
     String path = join(databasesPath, 'movies.db');
     print("db $path");
+
     var db = await openDatabase(path, version: 1, onCreate: _onCreate);
     return db;
   }
@@ -42,7 +43,7 @@ class MovieDB {
 
   Future<List<Movie>> getMovies() async {
     final dbClient = await db;
-    final mapMovies = await dbClient.query("movie");
+    final mapMovies = await dbClient.rawQuery("select * from movie");
     final movies =
         mapMovies.map<Movie>((json) => Movie.fromJson(json)).toList();
     return movies;
@@ -78,6 +79,7 @@ class MovieDB {
 
   Future close() async {
     var dbClient = await db;
-    return dbClient.close();
+    await dbClient.close();
+    dbClient = null;
   }
 }

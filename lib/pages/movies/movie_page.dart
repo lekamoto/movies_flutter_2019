@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movies_udemy/main.dart';
+import 'package:flutter_movies_udemy/pages/events/events.dart';
+import 'package:flutter_movies_udemy/pages/favoritos/favoritos_bloc.dart';
+import 'package:flutter_movies_udemy/pages/favoritos/tab_favoritos.dart';
 import 'package:flutter_movies_udemy/pages/movies/movie.dart';
 import 'package:flutter_movies_udemy/pages/movies/movies_bloc.dart';
 
@@ -13,7 +17,7 @@ class MoviePage extends StatefulWidget {
 
 class _MoviePageState extends State<MoviePage> {
   
-  final _bloc = MoviesBloc();
+  final _bloc = FavoritosBloc();
   
   final favoritado = false;
 
@@ -166,15 +170,19 @@ class _MoviePageState extends State<MoviePage> {
     );
   }
 
-  void _onClickFavoritar() {
-    final b = _bloc.favoritar(movie);
-    print(b);
+  Future _onClickFavoritar() async {
+    final b = await _bloc.favoritar(movie);
+
+    eventBus.fire(FavoritosEvent());
+
+    //favoritosBloc.fetch(isRefresh: true);
+    print("bloc fetch");
   }
 
   @override
   void dispose() {
     super.dispose();
 
-    _bloc.close();
+    //_bloc.close();
   }
 }
