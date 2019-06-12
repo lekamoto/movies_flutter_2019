@@ -53,9 +53,9 @@ class _MoviePageState extends State<MoviePage> {
                     builder: (context, snapshot) {
                       return FlareActor(
                         "assets/animations/favorite.flr",
-                        color: Colors.white,
+                        color: snapshot.data ? Colors.red : Colors.white,
                         shouldClip: false,
-                        animation: snapshot.data ? "Like" : "Dislike",
+                        animation: snapshot.data ? "Favorite" : "Unfavorite",
                       );
                     }),
               ),
