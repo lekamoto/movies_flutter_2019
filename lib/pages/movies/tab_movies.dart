@@ -10,14 +10,12 @@ import 'package:flutter_movies_udemy/widgets/text_error.dart';
 import 'movie_page.dart';
 
 class TabMovies extends StatefulWidget {
-
   @override
   _TabMoviesState createState() => _TabMoviesState();
 }
 
 class _TabMoviesState extends State<TabMovies>
-with AutomaticKeepAliveClientMixin<TabMovies>
-{
+    with AutomaticKeepAliveClientMixin<TabMovies> {
 //  final bloc = MoviesBloc();
 
   MoviesBloc get bloc => BlocProvider.getBloc<MoviesBloc>();
@@ -34,11 +32,9 @@ with AutomaticKeepAliveClientMixin<TabMovies>
 
   @override
   Widget build(BuildContext context) {
-
     return StreamBuilder(
       stream: bloc.moviesStream,
       builder: (context, snapshot) {
-
         if (!snapshot.hasData) {
           return Center(
             child: CircularProgressIndicator(),
@@ -47,7 +43,7 @@ with AutomaticKeepAliveClientMixin<TabMovies>
 
         Response<List<Movie>> response = snapshot.data;
 
-        if(response.isOk() && response.result.isEmpty) {
+        if (response.isOk() && response.result.isEmpty) {
           // Lista vazia
           return TextEmpty("Nenhum filme nos favoritos.");
         }
@@ -55,7 +51,10 @@ with AutomaticKeepAliveClientMixin<TabMovies>
         return response.isOk()
             ? _griView(response.result, context, true)
             : Center(
-                child: TextError(response.msg, onRefresh: _onRefreshError,),
+                child: TextError(
+                  response.msg,
+                  onRefresh: _onRefreshError,
+                ),
               );
       },
     );
@@ -88,19 +87,16 @@ with AutomaticKeepAliveClientMixin<TabMovies>
 
     return Material(
       child: InkWell(
-        child: _img(m.urlFoto),
+        child: Hero(
+          tag: m.title,
+          child: Image.network(
+            m.urlFoto,
+            fit: BoxFit.cover,
+          ),
+        ),
         onTap: () {
           _onClickMovie(m);
         },
-      ),
-    );
-  }
-
-  _img(img) {
-    return Container(
-      child: Image.network(
-        img,
-        fit: BoxFit.cover,
       ),
     );
   }

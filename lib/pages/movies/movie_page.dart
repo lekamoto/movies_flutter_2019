@@ -1,8 +1,6 @@
-import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movies_udemy/pages/movies/movie.dart';
 import 'package:flutter_movies_udemy/pages/movies/movie_bloc.dart';
-import 'package:flutter_movies_udemy/pages/movies/movies_bloc.dart';
 
 class MoviePage extends StatefulWidget {
   final Movie movie;
@@ -27,8 +25,6 @@ class _MoviePageState extends State<MoviePage> {
 
   @override
   Widget build(BuildContext context) {
-    print("build movie ${movie.title}");
-
     return Scaffold(
       body: _body(),
     );
@@ -62,9 +58,12 @@ class _MoviePageState extends State<MoviePage> {
           centerTitle: false,
           title: Text(movie.title),
           background: Container(
-            child: Image.network(
-              movie.urlFoto,
-              fit: BoxFit.cover,
+            child: Hero(
+              tag: movie.title,
+              child: Image.network(
+                movie.urlFoto,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),

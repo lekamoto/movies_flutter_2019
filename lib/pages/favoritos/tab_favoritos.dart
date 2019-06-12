@@ -1,3 +1,4 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movies_udemy/pages/events/events.dart';
 import 'package:flutter_movies_udemy/pages/favoritos/favoritos_bloc.dart';
@@ -8,7 +9,7 @@ import 'package:flutter_movies_udemy/utils/response.dart';
 import 'package:flutter_movies_udemy/widgets/text_empty.dart';
 import 'package:flutter_movies_udemy/widgets/text_error.dart';
 
-final favoritosBloc = FavoritosBloc();
+//final favoritosBloc = FavoritosBloc();
 
 class TabFavoritos extends StatefulWidget {
 
@@ -23,19 +24,25 @@ class _TabFavoritosState extends State<TabFavoritos>
   @override
   bool get wantKeepAlive => true;
 
+  FavoritosBloc get favoritosBloc => BlocProvider.getBloc<FavoritosBloc>();
+
   @override
   void initState() {
     super.initState();
 
+//    final favoritosBloc = BlocProvider.getBloc<FavoritosBloc>();
+
     favoritosBloc.fetch();
 
-    eventBus.on<FavoritosEvent>().listen((event) {
-      favoritosBloc.fetch();
-    });
+//    eventBus.on<FavoritosEvent>().listen((event) {
+//      favoritosBloc.fetch();
+//    });
   }
 
   @override
   Widget build(BuildContext context) {
+
+    final favoritosBloc = BlocProvider.getBloc<FavoritosBloc>();
 
     return StreamBuilder(
       stream: favoritosBloc.moviesStream,

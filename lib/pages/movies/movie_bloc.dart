@@ -1,4 +1,7 @@
 
+import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:flutter_movies_udemy/pages/events/events.dart';
+import 'package:flutter_movies_udemy/pages/favoritos/favoritos_bloc.dart';
 import 'package:flutter_movies_udemy/pages/movies/movie.dart';
 import 'package:flutter_movies_udemy/pages/movies/movie_db.dart';
 import 'package:rxdart/rxdart.dart';
@@ -41,7 +44,13 @@ class MovieBloc {
         return true;
       }
     } finally {
+
+      // Manda evento para atualizar a tela anterior
+      // Outra maneira de fazer seria deixar o bloc de favoritos global.
       //eventBus.fire(FavoritosEvent());
+
+      final favoritosBloc = BlocProvider.getBloc<FavoritosBloc>();
+      favoritosBloc.fetch();
     }
   }
 

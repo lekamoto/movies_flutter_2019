@@ -1,9 +1,10 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter_movies_udemy/pages/movies/movie.dart';
 import 'package:flutter_movies_udemy/pages/movies/movie_db.dart';
 import 'package:flutter_movies_udemy/utils/response.dart';
 import 'package:rxdart/rxdart.dart';
 
-class FavoritosBloc {
+class FavoritosBloc extends BlocBase {
   // progress
   final _progress = BehaviorSubject<bool>();
   get progressStream => _progress.stream;
@@ -23,6 +24,7 @@ class FavoritosBloc {
       final db = MovieDB.getInstance();
       final list = await db.getMovies();
       final movies = Response(true, result: list);
+      print("< sql ${movies.result.length}");
 
       _movies.sink.add(movies);
 
