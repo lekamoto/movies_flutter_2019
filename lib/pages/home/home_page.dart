@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movies_udemy/pages/events/events.dart';
 import 'package:flutter_movies_udemy/pages/favoritos/tab_favoritos.dart';
 import 'package:flutter_movies_udemy/pages/home/drawer.dart';
 import 'package:flutter_movies_udemy/pages/login/login_page.dart';

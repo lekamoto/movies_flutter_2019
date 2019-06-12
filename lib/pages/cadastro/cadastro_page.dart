@@ -1,16 +1,11 @@
-import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:flutter_movies_udemy/pages/cadastro/cadastro_bloc.dart';
-import 'package:flutter_movies_udemy/pages/home/home_page.dart';
-import 'package:flutter_movies_udemy/pages/login/login_api.dart';
 import 'package:flutter_movies_udemy/utils/alerts.dart';
 import 'package:flutter_movies_udemy/utils/nav.dart';
 import 'package:flutter_movies_udemy/utils/validators.dart';
 import 'package:flutter_movies_udemy/widgets/bg_login.dart';
 import 'package:flutter_movies_udemy/widgets/button.dart';
 import 'package:flutter_movies_udemy/widgets/button_cancel.dart';
-import 'package:flutter_movies_udemy/widgets/link.dart';
 import 'package:flutter_movies_udemy/widgets/textfield.dart';
 
 import 'cadastro_api.dart';

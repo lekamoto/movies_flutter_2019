@@ -1,7 +1,5 @@
 
 import 'package:flutter_movies_udemy/utils/response.dart';
-import 'dart:convert' as convert;
-import 'package:http/http.dart' as http;
 
 class CadastroInput {
   String nome;

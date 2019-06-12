@@ -1,5 +1,5 @@
 import 'dart:convert' as convert;
-import 'package:flutter/services.dart';
+
 import 'package:flutter_movies_udemy/pages/movies/movie.dart';
 import 'package:flutter_movies_udemy/utils/response.dart';
 import 'package:http/http.dart' as http;
