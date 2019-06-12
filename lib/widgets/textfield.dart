@@ -8,7 +8,8 @@ class AppText extends StatelessWidget {
   final Function onSave;
   final bool password;
 
-  AppText(this.label, this.hint, {this.validator, this.onSave, this.password=false});
+  AppText(this.label, this.hint,
+      {this.validator, this.onSave, this.password = false});
 
   @override
   Widget build(BuildContext context) {
@@ -22,19 +23,21 @@ class AppText extends StatelessWidget {
         fontSize: 18,
       ),
       decoration: InputDecoration(
-        labelText: this.label,
-        labelStyle: TextStyle(
-          color: Colors.grey,
-          fontSize: 18,
-        ),
-        hintText: this.hint,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(22),
-        ),
-        errorStyle: TextStyle(
-          fontSize: 18
-        )
-      ),
+          labelText: this.label,
+          labelStyle: TextStyle(
+            color: Colors.grey,
+            fontSize: 18,
+            fontWeight: FontWeight.bold
+          ),
+          hintText: this.hint,
+//          hintStyle: TextStyle(
+//            color: Colors.deepOrange,
+//            fontSize: 18,
+//          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(22),
+          ),
+          errorStyle: TextStyle(fontSize: 18)),
     );
   }
 }
