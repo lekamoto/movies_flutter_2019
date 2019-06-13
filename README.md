@@ -1,16 +1,15 @@
-# flutter_movies_udemy
+# movies_flutter_2019
+App simples de lista de filmes feita com Flutter (aula 1 e aula 2).
 
-A new Flutter application.
+## Projeto utiliza:
 
-## Getting Started
+* Flutter
+* FLare: https://www.2dimensions.com/a/funwithflutter/files/flare/heart/preview
 
-This project is a starting point for a Flutter application.
+* Para o Flare funcionar utilizar o channel "dev" do flutter. Abrir o terminal e digitar:
+* flutter channel dev
 
-A few resources to get you started if this is your first Flutter project:
+## prints
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img align="left" width="350" src="prints/print1.png">
+<img align="left" width="350" src="prints/print2.png">
