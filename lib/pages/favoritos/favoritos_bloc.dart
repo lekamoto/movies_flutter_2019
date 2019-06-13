@@ -7,10 +7,12 @@ import 'package:rxdart/rxdart.dart';
 class FavoritosBloc extends BlocBase {
   // progress
   final _progress = BehaviorSubject<bool>();
+
   get progressStream => _progress.stream;
 
   // stream
   final _movies = BehaviorSubject<Response<List<Movie>>>();
+
   get moviesStream => _movies.stream;
 
   Future fetch({bool isRefresh = false}) async {

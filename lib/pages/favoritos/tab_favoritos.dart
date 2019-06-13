@@ -8,18 +8,13 @@ import 'package:flutter_movies_udemy/utils/response.dart';
 import 'package:flutter_movies_udemy/widgets/text_empty.dart';
 import 'package:flutter_movies_udemy/widgets/text_error.dart';
 
-//final favoritosBloc = FavoritosBloc();
-
 class TabFavoritos extends StatefulWidget {
-
   @override
   _TabFavoritosState createState() => _TabFavoritosState();
 }
 
 class _TabFavoritosState extends State<TabFavoritos>
-    with AutomaticKeepAliveClientMixin<TabFavoritos>
-{
-
+    with AutomaticKeepAliveClientMixin<TabFavoritos> {
   @override
   bool get wantKeepAlive => true;
 
@@ -29,18 +24,11 @@ class _TabFavoritosState extends State<TabFavoritos>
   void initState() {
     super.initState();
 
-//    final favoritosBloc = BlocProvider.getBloc<FavoritosBloc>();
-
     favoritosBloc.fetch();
-
-//    eventBus.on<FavoritosEvent>().listen((event) {
-//      favoritosBloc.fetch();
-//    });
   }
 
   @override
   Widget build(BuildContext context) {
-
     final favoritosBloc = BlocProvider.getBloc<FavoritosBloc>();
 
     return StreamBuilder(
@@ -54,7 +42,7 @@ class _TabFavoritosState extends State<TabFavoritos>
 
         Response<List<Movie>> response = snapshot.data;
 
-        if(response.isOk() && response.result.isEmpty) {
+        if (response.isOk() && response.result.isEmpty) {
           // Lista vazia
           return TextEmpty("Nenhum filme nos favoritos.");
         }
@@ -62,8 +50,11 @@ class _TabFavoritosState extends State<TabFavoritos>
         return response.isOk()
             ? _griView(response.result, context, true)
             : Center(
-          child: TextError(response.msg, onRefresh: _onRefreshError,),
-        );
+                child: TextError(
+                  response.msg,
+                  onRefresh: _onRefreshError,
+                ),
+              );
       },
     );
   }
@@ -73,30 +64,33 @@ class _TabFavoritosState extends State<TabFavoritos>
       onRefresh: _onRefresh,
       child: gridOn
           ? GridView.builder(
-        gridDelegate:
-        SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemCount: movies.length,
-        itemBuilder: (context, index) {
-          return _item(movies, index, context);
-        },
-      )
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              itemCount: movies.length,
+              itemBuilder: (context, index) {
+                return _item(movies, index, context);
+              },
+            )
           : ListView.builder(
-        itemExtent: 600,
-        itemCount: movies.length,
-        itemBuilder: (context, index) {
-          return _item(movies, index, context);
-        },
-      ),
+              itemExtent: 600,
+              itemCount: movies.length,
+              itemBuilder: (context, index) {
+                return _item(movies, index, context);
+              },
+            ),
     );
   }
 
   _item(List<Movie> movies, index, context) {
     Movie m = movies[index];
 
+    // Tag para a animação do Hero
+    m.tag = m.title + "-fav";
+
     return Material(
       child: InkWell(
         child: Hero(
-          tag: m.title,
+          tag: m.tag,
           child: Image.network(
             m.urlFoto,
             fit: BoxFit.cover,
@@ -119,12 +113,5 @@ class _TabFavoritosState extends State<TabFavoritos>
 
   Future<void> _onRefreshError() {
     return favoritosBloc.fetch(isRefresh: true);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-
-    //_bloc.close();
   }
 }

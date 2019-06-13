@@ -85,10 +85,13 @@ class _TabMoviesState extends State<TabMovies>
   _item(List<Movie> movies, index, context) {
     Movie m = movies[index];
 
+    // Tag para a animação do Hero
+    m.tag = m.title;
+
     return Material(
       child: InkWell(
         child: Hero(
-          tag: m.title,
+          tag: m.tag,
           child: Image.network(
             m.urlFoto,
             fit: BoxFit.cover,

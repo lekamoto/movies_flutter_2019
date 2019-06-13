@@ -73,8 +73,7 @@ class MovieDB {
 
   Future<int> deleteMovie(Movie m) async {
     var dbClient = await db;
-    return await dbClient.rawDelete('delete from movie where id = ?',
-        [m.id]);
+    return await dbClient.rawDelete('delete from movie where id = ?', [m.id]);
   }
 
   Future close() async {

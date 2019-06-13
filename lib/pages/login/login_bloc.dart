@@ -11,7 +11,6 @@ class LoginBloc {
 
     try {
       return await LoginApi.login(input);
-
     } finally {
       _progressController.sink.add(false);
     }

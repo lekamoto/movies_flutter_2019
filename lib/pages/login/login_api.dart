@@ -1,4 +1,3 @@
-
 import 'dart:convert' as convert;
 
 import 'package:flutter_movies_udemy/utils/response.dart';
@@ -19,14 +18,14 @@ class LoginInput {
 class LoginResponse {
   final bool status;
   final String msg;
-  LoginResponse.fromJson(Map<String,dynamic> map) :
-        status = map["status"] == "OK",
+
+  LoginResponse.fromJson(Map<String, dynamic> map)
+      : status = map["status"] == "OK",
         msg = map["msg"];
 }
 
 class LoginApi {
   static Future<Response<LoginResponse>> login(LoginInput l) async {
-
     await Future.delayed(Duration(milliseconds: 200));
 
     final url = "http://livrowebservices.com.br/rest/login";

@@ -24,21 +24,31 @@ class _LoginPageState extends State<LoginPage> {
   final _input = LoginInput();
   final _bloc = LoginBloc();
 
+  double _imgWidth = 50;
+  double _imgHeight = 50;
+
+  @override
+  void initState() {
+    super.initState();
+
+//    setState(() {
+//      _imgWidth = 120;
+//       _imgHeight = 120;
+//
+//    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
-        children: <Widget>[
-          BgLogin(),
-          _body()
-        ],
+        children: <Widget>[BgLogin(), _body()],
       ),
     );
   }
 
   _body() {
-
     return Form(
       key: _formKey,
       child: Container(
@@ -47,8 +57,15 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             Container(
               padding: EdgeInsets.all(32),
-              child: Image.asset("assets/images/logo_nf.png",
-                  width: 120, height: 120),
+              child: AnimatedContainer(
+                duration: Duration(seconds: 5),
+                curve: Curves.bounceIn,
+                child: Image.asset(
+                  "assets/images/logo_nf.png",
+                  width: _imgWidth,
+                  height: _imgHeight,
+                ),
+              ),
             ),
             Container(
               margin: EdgeInsets.only(top: 16),
@@ -79,10 +96,8 @@ class _LoginPageState extends State<LoginPage> {
               builder: (context, snapshot) {
                 return Container(
                   margin: EdgeInsets.only(top: 16),
-                  child: AppButton(
-                    "Login", () => _onClickLogin(),
-                    showProgress : snapshot.data
-                  ),
+                  child: AppButton("Login", () => _onClickLogin(),
+                      showProgress: snapshot.data),
                 );
               },
             ),
@@ -130,6 +145,10 @@ class _LoginPageState extends State<LoginPage> {
 
   void _onClickGoogle() {
     print("Google");
+    setState(() {
+      _imgWidth = 120;
+      _imgHeight = 120;
+    });
   }
 
   void _onClickCadastro() {

@@ -1,4 +1,3 @@
-
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter_movies_udemy/pages/favoritos/favoritos_bloc.dart';
 import 'package:flutter_movies_udemy/pages/movies/movie.dart';
@@ -8,7 +7,9 @@ import 'package:rxdart/rxdart.dart';
 class MovieBloc {
   // Flag do favorito
   final _flagFavoritos = BehaviorSubject<bool>();
+
   get getFavoritos => _flagFavoritos.stream;
+
   get setFavorito => _flagFavoritos.sink.add;
 
   Future<bool> fetchFavorito(Movie m) async {
@@ -33,9 +34,7 @@ class MovieBloc {
         setFavorito(false);
 
         return false;
-
       } else {
-
         await db.saveMovie(m);
 
         setFavorito(true);
@@ -43,7 +42,6 @@ class MovieBloc {
         return true;
       }
     } finally {
-
       // Manda evento para atualizar a tela anterior
       // Outra maneira de fazer seria deixar o bloc de favoritos global.
       //eventBus.fire(FavoritosEvent());

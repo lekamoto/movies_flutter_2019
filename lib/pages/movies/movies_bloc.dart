@@ -8,10 +8,12 @@ import 'movie.dart';
 class MoviesBloc extends BlocBase {
   // progress
   final _progressController = BehaviorSubject<bool>();
+
   get progressStream => _progressController.stream;
 
   // stream
   final _moviesController = BehaviorSubject<Response<List<Movie>>>();
+
   get moviesStream => _moviesController.stream;
 
   Future fetch({bool isRefresh = false}) async {

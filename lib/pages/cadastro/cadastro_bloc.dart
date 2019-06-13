@@ -8,14 +8,11 @@ class CadastroBloc {
   get progressStream => _progressController.stream;
 
   cadastrar(CadastroInput input) async {
-
     _progressController.sink.add(true);
 
     try {
       return await CadastroApi.cadastrar(input);
-
     } finally {
-
       _progressController.sink.add(false);
     }
   }

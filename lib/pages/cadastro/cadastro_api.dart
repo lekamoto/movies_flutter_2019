@@ -1,4 +1,3 @@
-
 import 'package:flutter_movies_udemy/utils/response.dart';
 
 class CadastroInput {
@@ -24,7 +23,6 @@ class CadastroInput {
 
 class CadastroApi {
   static Future<Response> cadastrar(CadastroInput c) async {
-
     print("> post cadastro $c");
 
     await Future.delayed(Duration(seconds: 2));

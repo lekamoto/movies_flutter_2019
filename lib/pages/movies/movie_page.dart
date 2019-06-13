@@ -87,10 +87,10 @@ class _MoviePageState extends State<MoviePage> {
         ],
         flexibleSpace: FlexibleSpaceBar(
           centerTitle: false,
-          title: Text("> ${movie.title}"),
+          title: Text("${movie.title}"),
           background: Container(
             child: Hero(
-              tag: movie.title,
+              tag: movie.tag,
               child: Image.network(
                 movie.urlFoto,
                 fit: BoxFit.cover,
