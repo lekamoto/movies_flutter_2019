@@ -1,7 +1,6 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movies_udemy/pages/favoritos/favoritos_bloc.dart';
-import 'package:flutter_movies_udemy/pages/home/home_page.dart';
 import 'package:flutter_movies_udemy/pages/login/login_page.dart';
 import 'package:flutter_movies_udemy/pages/movies/movies_bloc.dart';
 
@@ -21,7 +20,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.deepOrange,
         ),
-        home: HomePage(),
+        home: LoginPage(),
       ),
     );
   }
