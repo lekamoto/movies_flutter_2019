@@ -1,4 +1,3 @@
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movies_udemy/pages/movies/movie.dart';
 import 'package:flutter_movies_udemy/pages/movies/movie_bloc.dart';
@@ -38,52 +37,22 @@ class _MoviePageState extends State<MoviePage> {
         expandedHeight: 350,
         pinned: false,
         actions: <Widget>[
-          Row(children: [
-            InkWell(
-              onTap: () {
-                _onClickFavoritar();
+          IconButton(
+            icon: StreamBuilder<bool>(
+              initialData: false,
+              stream: _bloc.getFavoritos,
+              builder: (context, snapshot) {
+                return Icon(
+                  Icons.favorite,
+                  size: 34,
+                  color: snapshot.data ? Colors.red : Colors.white,
+                );
               },
-              child: Container(
-                margin: EdgeInsets.only(right: 10),
-                width: 36,
-                height: 36,
-                child: StreamBuilder(
-                    initialData: false,
-                    stream: _bloc.getFavoritos,
-                    builder: (context, snapshot) {
-                      return FlareActor(
-                        "assets/animations/favorite.flr",
-                        color: snapshot.data ? Colors.red : Colors.white,
-                        shouldClip: false,
-                        animation: snapshot.data ? "Favorite" : "Unfavorite",
-                      );
-                    }),
-              ),
             ),
-//            Text(
-//              "Like",
-//              style: TextStyle(
-//                  fontSize: 11,
-//                  fontFamily: "Montserrat",
-//                  color: Colors.black45),
-//            ),
-          ])
-//          IconButton(
-//            icon: StreamBuilder<bool>(
-//              initialData: false,
-//              stream: _bloc.getFavoritos,
-//              builder: (context, snapshot) {
-//                return Icon(
-//                  Icons.favorite,
-//                  size: 34,
-//                  color: snapshot.data ? Colors.red : Colors.white,
-//                );
-//              },
-//            ),
-//            onPressed: () {
-//              _onClickFavoritar();
-//            },
-//          ),
+            onPressed: () {
+              _onClickFavoritar();
+            },
+          ),
         ],
         flexibleSpace: FlexibleSpaceBar(
           centerTitle: false,
