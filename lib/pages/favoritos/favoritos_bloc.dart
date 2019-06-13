@@ -26,7 +26,6 @@ class FavoritosBloc extends BlocBase {
       final db = MovieDB.getInstance();
       final list = await db.getMovies();
       final movies = Response(true, result: list);
-      print("< sql ${movies.result.length}");
 
       _movies.sink.add(movies);
 
