@@ -21,13 +21,14 @@ dependencies:
   flutter:
     sdk: flutter
 
-  font_awesome_flutter: ^8.4.0
-  flutter_auth_buttons: ^0.5.0
-  rxdart: ^0.22.0
-  bloc_pattern: ^2.1.9+3
+  font_awesome_flutter: ^8.5.0
+  flutter_auth_buttons: ^0.6.0
+  rxdart: ^0.22.6
+  bloc_pattern: ^2.5.1
   http: ^0.12.0+2
   sqflite: any
   event_bus: ^1.1.0
+  cloud_firestore: ^0.12.10+2
 
 #  flare_flutter:
 #    git:

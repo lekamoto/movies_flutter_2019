@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "584117830759",
+    "firebase_url": "https://moviesup2019b.firebaseio.com",
+    "project_id": "moviesup2019b",
+    "storage_bucket": "moviesup2019b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584117830759:android:c7f88ca3b2e13b947140c2",
+        "android_client_info": {
+          "package_name": "br.com.flutter.flutter_movies_udemy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584117830759-uek4fs2ufsg2fmjuq18ucdio15r3i0ba.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.flutter.flutter_movies_udemy",
+            "certificate_hash": "6c6b4f75a99e6bd7e7c55e10a5b317bd64786ef9"
+          }
+        },
+        {
+          "client_id": "584117830759-i0b52ercrgotbqpkusku6hfc7gef8ncn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQAR-xhNz2n0X4PkskE7wszg_nQvOVklg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584117830759-i0b52ercrgotbqpkusku6hfc7gef8ncn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
