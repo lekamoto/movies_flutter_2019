@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+import 'package:flutter_movies_udemy/firebase_service.dart';
 import 'package:flutter_movies_udemy/pages/cadastro/cadastro_page.dart';
 import 'package:flutter_movies_udemy/pages/home/home_page.dart';
 import 'package:flutter_movies_udemy/pages/login/login_api.dart';
@@ -129,8 +130,17 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void _onClickGoogle() {
+  void _onClickGoogle() async {
     print("Google");
+    final service = FirebaseService();
+    final response = await service.loginGoogle();
+
+    if (response.isOk()) {
+      pushReplacement(context, HomePage());
+      print("OK!");
+    } else {
+      alert(context, "Filmes", "Erro de login do Google");
+    }
   }
 
   void _onClickCadastro() {
