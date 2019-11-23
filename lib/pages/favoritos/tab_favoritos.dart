@@ -1,4 +1,5 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movies_udemy/pages/favoritos/favoritos_bloc.dart';
 import 'package:flutter_movies_udemy/pages/movies/movie.dart';
@@ -29,10 +30,9 @@ class _TabFavoritosState extends State<TabFavoritos>
 
   @override
   Widget build(BuildContext context) {
-    final favoritosBloc = BlocProvider.getBloc<FavoritosBloc>();
 
-    return StreamBuilder(
-      stream: favoritosBloc.moviesStream,
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('movies').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(
@@ -40,21 +40,11 @@ class _TabFavoritosState extends State<TabFavoritos>
           );
         }
 
-        Response<List<Movie>> response = snapshot.data;
+        List<Movie> movies = snapshot.data.documents
+            .map<Movie>((document) => Movie.fromJson(document.data) )
+            .toList();
 
-        if (response.isOk() && response.result.isEmpty) {
-          // Lista vazia
-          return TextEmpty("Nenhum filme nos favoritos.");
-        }
-
-        return response.isOk()
-            ? _griView(response.result, context, true)
-            : Center(
-                child: TextError(
-                  response.msg,
-                  onRefresh: _onRefreshError,
-                ),
-              );
+        return _griView(movies, context, true);
       },
     );
   }

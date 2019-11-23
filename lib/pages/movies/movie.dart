@@ -47,7 +47,8 @@ class Movie {
         popularity = json["popularity"].toString(),
         production_companies = json["production_companies"],
         runtime = json["runtime"].toString(),
-        vote_count = json["vote_count"].toString();
+        vote_count = json["vote_count"].toString()
+      ;
 
   Map toMap() {
     var map = {
