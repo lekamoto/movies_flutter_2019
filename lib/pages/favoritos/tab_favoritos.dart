@@ -79,12 +79,9 @@ class _TabFavoritosState extends State<TabFavoritos>
 
     return Material(
       child: InkWell(
-        child: Hero(
-          tag: m.tag,
-          child: Image.network(
-            m.urlFoto,
-            fit: BoxFit.cover,
-          ),
+        child: Image.network(
+          m.urlFoto,
+          fit: BoxFit.cover,
         ),
         onTap: () {
           _onClickMovie(m);

@@ -58,12 +58,9 @@ class _MoviePageState extends State<MoviePage> {
           centerTitle: false,
           title: Text("${movie.title}"),
           background: Container(
-            child: Hero(
-              tag: movie.tag,
-              child: Image.network(
-                movie.urlFoto,
-                fit: BoxFit.cover,
-              ),
+            child: Image.network(
+              movie.urlFoto,
+              fit: BoxFit.cover,
             ),
           ),
         ),
