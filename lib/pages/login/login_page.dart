@@ -12,6 +12,7 @@ import 'package:flutter_movies_udemy/widgets/button.dart';
 import 'package:flutter_movies_udemy/widgets/link.dart';
 import 'package:flutter_movies_udemy/widgets/textfield.dart';
 
+import '../../firebase.dart';
 import 'login_bloc.dart';
 
 class LoginPage extends StatefulWidget {
@@ -24,6 +25,12 @@ class _LoginPageState extends State<LoginPage> {
 
   final _input = LoginInput();
   final _bloc = LoginBloc();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
